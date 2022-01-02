@@ -53,9 +53,9 @@ class LabelSmoothingCrossEntropyLoss(nn.Layer):
         self.name = name
 
     def forward(self, x, target):
-        target = paddle.nn.functional.one_hot(target, num_classes=x.shape[1])
-        target = paddle.nn.functional.label_smooth(target, epsilon=self.smoothing)        
-        loss = paddle.nn.functional.cross_entropy(
+        target = F.one_hot(target, num_classes=x.shape[1])
+        target = F.label_smooth(target, epsilon=self.smoothing)        
+        loss = F.cross_entropy(
             x,
             target,            
             weight=self.weight,            
